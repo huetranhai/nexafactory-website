@@ -1,0 +1,176 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Hướng dẫn triển khai NexaFactory — GitHub & Namecheap</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f6f0;color:#142f36;font:16px/1.8 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}main{max-width:980px;margin:0 auto;padding:60px 40px}header{background:#132d35;color:#fff;padding:20px 40px;font-size:13px;letter-spacing:1px}h1{font-size:40px;line-height:1.2;letter-spacing:-1.4px}h2{font-size:26px;line-height:1.3;margin-top:50px;border-top:1px solid #cbd6c7;padding-top:26px}h3{font-size:20px;margin-top:28px}a{color:#3b6834;text-decoration:underline;text-underline-offset:3px}pre{background:#132d35;color:#e3eccf;border-radius:9px;padding:20px;overflow:auto;font-size:13px;line-height:1.7}code{font-family:Consolas,monospace}p>code,li>code,td>code{background:#e3eadb;padding:2px 5px;border-radius:3px;font-size:13px}table{border-collapse:collapse;width:100%;background:white;font-size:13px;display:block;overflow:auto}th,td{border:1px solid #d3ddcc;padding:12px 16px;text-align:left}th{background:#e5eddc}li{margin:8px 0}hr{border:0;border-top:1px solid #cbd6c7}@media(max-width:600px){main{padding:32px 20px}h1{font-size:31px}h2{font-size:24px}header{padding:18px 20px}}@media print{body{font-size:11px;background:white}main{max-width:none;padding:0}header{color:#142f36;background:white;padding:0}h1{font-size:25px}h2{font-size:18px;margin-top:25px;padding-top:14px}pre{white-space:pre-wrap;overflow:visible;background:#eee;color:#142f36}h2,h3{break-after:avoid}table,pre{break-inside:avoid}a{color:inherit}}</style></head><body><header>NEXAFACTORY / TÀI LIỆU BÀN GIAO / 09.10.2026</header><main><h1>Triển khai NexaFactory lên danhnguyen.me</h1>
+<p>Hướng dẫn cho project HTML/CSS/JavaScript thuần, quản lý mã nguồn trên GitHub và DNS tại Namecheap. Cập nhật theo tài liệu chính thức ngày 09/10/2026. Các giá trị dưới đây là cấu hình cần đạt, không phải xác nhận DNS hiện tại của bạn.</p>
+<h2>1. Chuẩn bị và xem thử</h2>
+<p>Bạn cần tài khoản GitHub, quyền quản lý <code>danhnguyen.me</code> và project đã giải nén. <code>USERNAME</code> trong hướng dẫn là tên tài khoản GitHub thật, không phải địa chỉ email.</p>
+<p>Mở thư mục <code>nexafactory-website</code>, nhấp đúp <code>index.html</code>. Để thử clipboard và điều hướng trong môi trường web, dùng Terminal tại thư mục project:</p>
+<pre><code class="language-bash">cd /duong-dan/nexafactory-website
+python3 -m http.server 8080
+</code></pre>
+<p>Mở <code>http://localhost:8080</code>. Trên Windows, nếu lệnh <code>python3</code> không có, dùng <code>py -m http.server 8080</code>. Có thể dùng extension Live Server của VS Code thay thế.</p>
+<p>Kiểm tra: menu, liên kết các phần, lựa chọn A/B/C trong dashboard, FAQ, trường bắt buộc trong form, nút soạn email và giao diện khi thu nhỏ trình duyệt. Nút email cần ứng dụng xử lý <code>mailto:</code>; nếu không có, chọn sao chép nội dung rồi dán vào Gmail.</p>
+<p>Tên NexaFactory, email liên hệ và nội dung dịch vụ là mẫu. Thay bằng thông tin thực tế trước khi công bố. Nếu dùng <code>contact@danhnguyen.me</code>, tạo hộp thư hoặc alias Google Workspace tương ứng và thử nhận thư. Dashboard không kết nối nhà máy thật.</p>
+<h3>Phạm vi sử dụng GitHub Pages</h3>
+<p>Tài liệu GitHub giới hạn việc dùng Pages làm hosting miễn phí để vận hành kinh doanh trực tuyến, thương mại điện tử hoặc SaaS thương mại. Các bước dưới đây dành cho việc triển khai bản mẫu tĩnh. Khi chuyển thành website vận hành kinh doanh, hãy đối chiếu mục đích với <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">giới hạn GitHub Pages</a>, và dùng hosting phù hợp nếu thuộc phạm vi bị hạn chế. Việc chỉ dùng HTML không tự động khiến mọi mô hình kinh doanh phù hợp với Pages. Mã nguồn này có thể triển khai trên hosting tĩnh khác mà không cần viết lại.</p>
+<h2>2. Tạo repository GitHub</h2>
+<ol>
+<li>Đăng nhập <a href="https://github.com">GitHub</a>.</li>
+<li>Chọn <strong>New repository</strong>.</li>
+<li>Nhập tên <code>nexafactory-website</code>.</li>
+<li>Chọn <strong>Public</strong> khi dùng GitHub Free cho hướng dẫn này.</li>
+<li>Nếu dùng các lệnh Git bên dưới, để repository trống: chưa chọn README, .gitignore hoặc license.</li>
+<li>Chọn <strong>Create repository</strong>.</li>
+</ol>
+<p>Không đưa dữ liệu nội bộ nhà máy, mật khẩu hoặc khóa API vào repository công khai.</p>
+<h3>Cách A — Upload qua giao diện</h3>
+<p>Trong repository trống, nhấn <strong>uploading an existing file</strong>; ở repository đã có nội dung, chọn <strong>Add file → Upload files</strong>. Kéo các tệp và thư mục <strong>bên trong</strong> <code>nexafactory-website</code> vào, gồm <code>index.html</code>, <code>assets</code>, các trang phụ và tài liệu. Nhấn <strong>Commit changes</strong>.</p>
+<p>Sau upload, <code>index.html</code> phải nằm ngay ở gốc repository, không nằm trong một thư mục <code>nexafactory-website</code> lồng thêm. <code>.nojekyll</code> là tệp hỗ trợ tĩnh; nếu Finder ẩn tệp này, nhấn Command+Shift+. để hiện hoặc dùng Git. Giữ nguyên thư mục <code>assets</code>, không tải mỗi <code>index.html</code>.</p>
+<h3>Cách B — Dùng Git trong Terminal</h3>
+<p>Chạy trong thư mục project; thay <code>USERNAME</code> trước khi chạy:</p>
+<pre><code class="language-bash">git init
+git add .
+git commit -m &quot;Create NexaFactory startup website&quot;
+git branch -M main
+git remote add origin https://github.com/USERNAME/nexafactory-website.git
+git push -u origin main
+</code></pre>
+<p>GitHub yêu cầu phương thức xác thực được hỗ trợ, như SSH hoặc credential manager/token phù hợp; không dùng mật khẩu tài khoản thay token. Nếu chưa quen Git, cách upload qua giao diện là đủ. Nếu báo <code>Author identity unknown</code>, cấu hình <code>git config user.name &quot;Ten cua ban&quot;</code> và <code>git config user.email &quot;Email GitHub cua ban&quot;</code>, rồi commit lại.</p>
+<h2>3. Xuất bản bản mẫu bằng GitHub Pages</h2>
+<p>Trong <strong>repository</strong>:</p>
+<ol>
+<li><strong>Settings → Pages</strong>.</li>
+<li><strong>Build and deployment → Source: Deploy from a branch</strong>.</li>
+<li><strong>Branch: main</strong>, thư mục <strong>/(root)</strong>.</li>
+<li>Nhấn <strong>Save</strong>.</li>
+<li>Xem tab <strong>Actions</strong> hoặc thông báo ở Pages; chờ deployment thành công.</li>
+<li>Mở <code>https://USERNAME.github.io/nexafactory-website/</code> để kiểm tra trước.</li>
+</ol>
+<p>Project không cần npm hoặc build. Nguồn xuất bản phải là gốc repository vì <code>index.html</code> ở đó. Xem <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">cấu hình nguồn xuất bản</a>.</p>
+<p>Project có <code>CNAME.example</code>, chưa có tệp <code>CNAME</code> hoạt động để bạn thử URL GitHub trước. Tên miền chính được thiết lập ở bước 5. Canonical, sitemap và đường dẫn trang 404 đã dành cho <code>danhnguyen.me</code>; nút về trang chủ của 404 chỉ hoạt động đúng sau khi domain đã kết nối.</p>
+<h2>4. Xác minh quyền sở hữu tên miền</h2>
+<p>Trong <strong>Settings của tài khoản GitHub</strong> (nhấn avatar → Settings, không phải Settings của repository), chọn <strong>Pages → Add a domain</strong>, nhập <code>danhnguyen.me</code>.</p>
+<p>GitHub cung cấp tên và mã TXT. Trên Namecheap, tạo TXT với Host tương ứng, thường dạng <code>_github-pages-challenge-USERNAME</code>, và Value là mã được GitHub cấp. Namecheap tự nối phần <code>danhnguyen.me</code>; sao chép giá trị theo tài khoản thật, không tự tạo mã. Quay lại GitHub nhấn <strong>Verify</strong> khi TXT đã cập nhật. Giữ TXT sau xác minh. Đây là TXT của GitHub, khác TXT <code>google-site-verification</code> của Google Workspace. Xem <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages">hướng dẫn xác minh domain</a>.</p>
+<h2>5. Gắn danhnguyen.me vào repository</h2>
+<p>Vào <strong>repository → Settings → Pages → Custom domain</strong>, nhập:</p>
+<pre><code class="language-text">danhnguyen.me
+</code></pre>
+<p>Nhấn <strong>Save</strong>. Không nhập <code>https://</code>, đường dẫn hoặc tên repository. Thực hiện bước này trước khi đổi DNS trỏ website.</p>
+<p>Với phương án triển khai từ branch, GitHub tạo commit chứa tệp <code>CNAME</code> tại gốc. Nội dung tệp là <code>danhnguyen.me</code>. Giữ tệp đó trong các lần cập nhật. Nếu dùng Git trên máy, chạy <code>git pull --ff-only origin main</code> để lấy commit mới về trước khi cập nhật tiếp. Chỉ đặt tệp CNAME không thay thế việc cấu hình Custom domain trong Pages settings. Xem <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">quản lý domain riêng</a>.</p>
+<h2>6. Cấu hình DNS trên Namecheap</h2>
+<p>Mở <a href="https://www.namecheap.com">Namecheap</a> → <strong>Domain List → danhnguyen.me → Manage</strong>.</p>
+<h3>6.1. Kiểm tra nơi đang quản lý DNS</h3>
+<p>Trong tab <strong>Domain</strong>, kiểm tra <strong>Nameservers</strong>. Khi đang dùng Namecheap BasicDNS/PremiumDNS/FreeDNS, cấu hình ở <strong>Advanced DNS → Host Records</strong> theo bảng dưới. Nếu đang dùng nameserver của nhà cung cấp khác, cấu hình ở nhà cung cấp đó; thay tại Namecheap Advanced DNS sẽ không có tác dụng. Không chuyển nameserver chỉ để thêm website, vì có thể làm mất hiệu lực các bản ghi email nếu chưa sao chép đầy đủ.</p>
+<h3>6.2. Bản ghi website cần đạt</h3>
+<p>TTL có thể để <code>Automatic</code>. Các bản ghi đã đúng thì giữ, không thêm trùng.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Host</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A Record</td>
+<td>@</td>
+<td>185.199.108.153</td>
+</tr>
+<tr>
+<td>A Record</td>
+<td>@</td>
+<td>185.199.109.153</td>
+</tr>
+<tr>
+<td>A Record</td>
+<td>@</td>
+<td>185.199.110.153</td>
+</tr>
+<tr>
+<td>A Record</td>
+<td>@</td>
+<td>185.199.111.153</td>
+</tr>
+<tr>
+<td>CNAME Record</td>
+<td>www</td>
+<td>USERNAME.github.io</td>
+</tr>
+</tbody></table>
+<p>Mỗi IP là một A Record riêng. CNAME chỉ chứa <code>USERNAME.github.io</code>, không chứa <code>https://</code> hoặc <code>/nexafactory-website</code>. Nếu <code>www</code> hiện là <code>danhnguyen.me.</code>, sửa sang tài khoản GitHub thật. Không tạo CNAME ở Host <code>@</code> theo phương án này.</p>
+<p>Kiểm tra bản ghi website cũ gây xung đột tại <code>@</code> và <code>www</code>, như A/AAAA đến hosting khác hoặc URL Redirect. Chỉ sửa bản ghi thuộc website dự định thay thế. Nhấn dấu tick để lưu từng dòng hoặc <strong>Save All Changes</strong> theo giao diện đang hiển thị. Xem <a href="https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages/">hướng dẫn GitHub Pages của Namecheap</a>.</p>
+<h3>6.3. Giữ cấu hình Google Workspace</h3>
+<p>Việc kết nối website thực hiện ở Host Records. Không chuyển Mail Settings về Email Forwarding và không xóa:</p>
+<ul>
+<li>MX của Google Workspace.</li>
+<li>TXT xác minh Google (<code>google-site-verification=...</code>).</li>
+<li>SPF tại <code>@</code>, DKIM tại selector như <code>google._domainkey</code>, DMARC tại <code>_dmarc</code>.</li>
+<li>TXT xác minh GitHub vừa tạo ở bước 4.</li>
+</ul>
+<p>TXT tại <code>@</code> có thể cùng tồn tại với các A Record website. Website và email dùng các loại bản ghi khác nhau. Hướng dẫn này không thay thế bước kích hoạt Gmail; nếu email chưa hoạt động, hoàn thành Google Workspace riêng trước.</p>
+<h2>7. Bật HTTPS và kiểm tra</h2>
+<p>Sau khi DNS cập nhật, mở <strong>repository → Settings → Pages</strong> và kiểm tra domain. Khi khả dụng, bật <strong>Enforce HTTPS</strong>. GitHub quản lý chứng chỉ cho domain được cấu hình đúng; không cần mua/cài SSL Namecheap riêng cho GitHub Pages. DNS và việc cấp chứng chỉ có thể cần thời gian, không phải lỗi ngay sau khi Save. Xem <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https">HTTPS trên GitHub Pages</a>.</p>
+<p>Kiểm tra kết quả mong muốn:</p>
+<ul>
+<li><code>https://danhnguyen.me</code> mở trang NexaFactory.</li>
+<li><code>https://www.danhnguyen.me</code> chuyển về tên miền chính khi cả hai đã cấu hình đúng.</li>
+<li>Không có cảnh báo chứng chỉ; CSS, JS và ảnh tải đầy đủ.</li>
+<li>Menu mobile, dashboard A/B/C, FAQ và biểu mẫu hoạt động.</li>
+<li><code>https://danhnguyen.me/privacy.html</code> mở trang riêng tư.</li>
+<li>Một đường dẫn không tồn tại hiển thị trang 404 sau deployment.</li>
+<li>Email Google Workspace vẫn gửi và nhận được.</li>
+</ul>
+<p>Trên Mac/Linux, có thể kiểm tra bằng Terminal:</p>
+<pre><code class="language-bash">dig +short NS danhnguyen.me
+dig +short A danhnguyen.me
+dig +short CNAME www.danhnguyen.me
+dig +short MX danhnguyen.me
+</code></pre>
+<p>Đầu ra A cần trỏ IP Pages trong bảng; thứ tự không quan trọng. CNAME cần là tài khoản GitHub của bạn. MX phục vụ Google Workspace. Nếu dùng Windows, có thể dùng <code>nslookup -type=A danhnguyen.me</code> và <code>nslookup -type=CNAME www.danhnguyen.me</code>.</p>
+<h2>8. Cập nhật và xử lý lỗi</h2>
+<p>Để chỉnh nội dung, sửa <code>index.html</code>; chỉnh màu trong <code>assets/css/styles.css</code>; chỉnh recipient và dữ liệu mẫu trong <code>assets/js/main.js</code>. Có thể sửa file trực tiếp trên GitHub rồi commit. Nếu dùng Git trên máy:</p>
+<pre><code class="language-bash">git pull --ff-only origin main
+git add .
+git commit -m &quot;Update NexaFactory content&quot;
+git push origin main
+</code></pre>
+<p>Pages triển khai lại theo branch đã chọn. Giữ tệp CNAME và cấu trúc assets. Nếu Git báo conflict, xử lý trước khi push; không force push chỉ để bỏ qua lỗi.</p>
+<table>
+<thead>
+<tr>
+<th>Hiện tượng</th>
+<th>Việc cần kiểm tra</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>URL GitHub trả 404</td>
+<td>Branch main, /(root), index.html ở gốc và trạng thái Actions</td>
+</tr>
+<tr>
+<td>Không có CSS/ảnh</td>
+<td>Assets có được upload không; tên file có đúng chữ hoa/thường không</td>
+</tr>
+<tr>
+<td>DNS check chưa thành công</td>
+<td>Nameserver có đúng nơi đang sửa; A và CNAME có đúng giá trị; DNS đã cập nhật chưa</td>
+</tr>
+<tr>
+<td>HTTPS chưa khả dụng</td>
+<td>DNS xung đột ở @/www, đặc biệt A/AAAA cũ; trạng thái cấp chứng chỉ; nếu có CAA, kiểm tra quyền cấp chứng chỉ theo tài liệu GitHub</td>
+</tr>
+<tr>
+<td>Nút email không mở</td>
+<td>Máy chưa cấu hình trình xử lý mailto; dùng nút sao chép và dán vào Gmail</td>
+</tr>
+<tr>
+<td>Email không nhận được</td>
+<td>Hộp thư/alias contact đã tạo chưa; MX và trạng thái kích hoạt Gmail; không thay A Record để sửa lỗi mail</td>
+</tr>
+<tr>
+<td>Bản cập nhật chưa hiển thị</td>
+<td>Deployment mới đã thành công chưa; tải lại bỏ cache</td>
+</tr>
+</tbody></table>
+<p>Tham khảo thêm <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages">xử lý domain riêng</a>.</p>
+<h2>9. Bàn giao và bước tiếp theo</h2>
+<p>Mở <code>docs/DESIGN.md</code> để biết cấu trúc từng phần và nơi chỉnh sửa. Website hiện là bản mẫu hoàn chỉnh về giao diện, không phải nền tảng MES/ERP vận hành. Nếu cần gửi biểu mẫu trực tiếp, đăng nhập, cơ sở dữ liệu hoặc dashboard dữ liệu thật, phải triển khai thêm backend và hosting phù hợp.</p>
+<p>Project được cung cấp để bạn triển khai. Tài khoản GitHub, cấu hình DNS và website đang chạy trên domain chưa được thay đổi từ cuộc trao đổi này.</p>
+</main></body></html>

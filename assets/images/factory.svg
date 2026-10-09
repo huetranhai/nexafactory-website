@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="470" viewBox="0 0 660 470">
+<defs><pattern id="grid" width="40" height="23" patternUnits="userSpaceOnUse" patternTransform="matrix(1 .58 -1 .58 330 -60)"><path d="M40 0H0V23" fill="none" stroke="#c7d2c2" stroke-width=".7"/></pattern><linearGradient id="roof" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#dce5d5"/></linearGradient><linearGradient id="left" x2="1" y2="1"><stop stop-color="#bbcdb8"/><stop offset="1" stop-color="#e5ebde"/></linearGradient><filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter></defs>
+<rect width="660" height="470" fill="url(#grid)" opacity=".5"/>
+<ellipse cx="326" cy="316" rx="190" ry="65" fill="#526a53" opacity=".13" filter="url(#shadow)"/>
+<path d="m107 259 210-122 234 136-210 121z" fill="#d1ddc6" stroke="#aec1a5"/>
+<path d="m107 259 234 136v12L107 271z" fill="#a7b99d"/><path d="m341 395 210-122v12L341 407z" fill="#b9caaa"/>
+<!-- Central production building -->
+<path d="m170 231 132-77 177 103-132 77z" fill="url(#roof)" stroke="#b6c6ad"/>
+<path d="m170 231 177 103v68L170 299z" fill="url(#left)" stroke="#a4b69c"/>
+<path d="m347 334 132-77v68l-132 77z" fill="#88a481" stroke="#829d7a"/>
+<path d="m183 234 16-28 43-25 16 10-16 28zM230 261l16-28 43-25 16 10-16 28zM277 288l16-28 43-25 16 10-16 28zM324 315l16-28 43-25 16 10-16 28z" fill="#f5f8ef" stroke="#bed0b2"/>
+<path d="m183 234 59-34v19l-59 34zM230 261l59-34v19l-59 34zM277 288l59-34v19l-59 34zM324 315l59-34v19l-59 34z" fill="#8fab99"/>
+<g fill="#476a64"><path d="m184 267 26 15v17l-26-15zM220 288l26 15v17l-26-15zM256 309l26 15v17l-26-15zM292 330l26 15v17l-26-15z"/><path d="m371 332 22-13v30l-22 13zM404 313l22-13v30l-22 13zM437 294l22-13v30l-22 13z"/></g>
+<g stroke="#bccab5" stroke-width="2"><path d="m197 275v17M233 296v17M269 317v17M305 338v17"/></g>
+<!-- Machine modules -->
+<path d="m420 193 53-30 49 28-53 31z" fill="#f6f8f0" stroke="#9cb49b"/><path d="m420 193 49 29v48l-49-28z" fill="#bfd0b7" stroke="#9cb49b"/><path d="m469 222 53-31v48l-53 31z" fill="#75977c" stroke="#6b8c72"/>
+<path d="m444 200 28-16 25 14-28 16z" fill="#132d35"/><path d="m448 199 23-13 9 5-23 13z" fill="#d6f36b"/><path d="m432 220 22 12v11l-22-12z" fill="#536f67"/>
+<path d="m486 263 24-14 22 13-24 14z" fill="#f1f6e8"/><path d="m486 263 22 13v23l-22-13z" fill="#bbd0ad"/><path d="m508 276 24-14v23l-24 14z" fill="#88a880"/>
+<!-- Silos -->
+<path d="M216 125v81c0 17 46 17 46 0v-81" fill="#a8bca3" stroke="#89a381"/><ellipse cx="239" cy="125" rx="23" ry="13" fill="#f0f5e8" stroke="#a0b697"/><path d="M219 135c8 5 22 7 34 3M219 165c8 5 22 7 34 3M219 194c8 5 22 7 34 3" fill="none" stroke="#90a888"/>
+<path d="M155 160v81c0 17 46 17 46 0v-81" fill="#bbceb2" stroke="#89a381"/><ellipse cx="178" cy="160" rx="23" ry="13" fill="#f0f5e8" stroke="#a0b697"/><path d="M158 169c8 5 22 7 34 3M158 199c8 5 22 7 34 3M158 228c8 5 22 7 34 3" fill="none" stroke="#a0b697"/>
+<!-- Connected control hub -->
+<path d="m363 138 43-25 43 25-43 25z" fill="#d6f36b" stroke="#9ab745"/><path d="m363 138 43 25v33l-43-25z" fill="#b0cd53"/><path d="m406 163 43-25v33l-43 25z" fill="#809d3b"/>
+<path d="m386 138 20-12 20 12-20 12z" fill="#132d35"/>
+<!-- Digital connections -->
+<g fill="none" stroke="#4d7665" stroke-width="2" stroke-dasharray="5 5"><path d="M239 125V83l167 96v-41M178 160V94l228 132v-88M469 193v-67l-63 36M319 264v-61l87 50v-57"/></g>
+<g fill="#d6f36b" stroke="#5e7c42" stroke-width="2"><circle cx="239" cy="125" r="5"/><circle cx="178" cy="160" r="5"/><circle cx="469" cy="193" r="5"/><circle cx="319" cy="264" r="5"/><circle cx="406" cy="138" r="5"/></g>
+<!-- Foreground loading lane -->
+<path d="m146 312 144 83" stroke="#f3f7e8" stroke-width="10"/><path d="m147 312 144 83" stroke="#b8caa7" stroke-width="1" stroke-dasharray="8 8"/>
+<path d="m194 319 26-15 48 28-26 15z" fill="#f9fbf6" stroke="#93aa8a"/><path d="m194 319 48 28v21l-48-28z" fill="#d2deca"/><path d="m242 347 26-15v21l-26 15z" fill="#8ba381"/>
+<path d="m177 330 18-11 24 14-18 11z" fill="#365955"/><path d="m177 330 24 14v21l-24-14z" fill="#294941"/><path d="m201 344 18-11v21l-18 11z" fill="#517768"/>
+<path d="m180 334 15 9v7l-15-9z" fill="#a9c9ba"/><ellipse cx="186" cy="352" rx="5" ry="7" fill="#132d35" transform="rotate(-30 186 352)"/><ellipse cx="228" cy="376" rx="5" ry="7" fill="#132d35" transform="rotate(-30 228 376)"/>
+<g fill="#4e7352"><path d="m127 261 15-38 15 38z"/><path d="m527 309 15-38 15 38z"/></g><g stroke="#7c976e" stroke-width="3"><path d="M142 260v16M542 308v16"/></g>
+</svg>
